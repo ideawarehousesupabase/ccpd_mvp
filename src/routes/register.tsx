@@ -5,7 +5,7 @@ import { ShieldCheck, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { registerUser } from "@/lib/auth";
+import { registerUser, saveSession } from "@/lib/auth";
 import { isFirebaseConfigured } from "@/lib/firebase";
 
 export const Route = createFileRoute("/register")({
@@ -53,9 +53,10 @@ function RegisterPage() {
     }
     setLoading(true);
     try {
-      await registerUser(form);
-      toast.success("Account created. Please log in.");
-      navigate({ to: "/login" });
+      const user = await registerUser(form);
+      await saveSession(user);
+      toast.success("Account created successfully!");
+      navigate({ to: "/dashboard" });
     } catch (err) {
       toast.error(err instanceof Error ? err.message : "Could not create the account.");
     } finally {
