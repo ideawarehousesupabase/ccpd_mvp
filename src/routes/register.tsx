@@ -82,10 +82,10 @@ function RegisterPage() {
         <p className="text-xs text-primary-foreground/60">Workspace analytics built from your complaint data</p>
       </div>
 
-      <div className="flex items-center justify-center px-4 py-12 sm:px-8">
+      <div className="flex items-center justify-center px-4 py-20 sm:px-12">
         <div className="w-full max-w-md">
-          <h1 className="text-2xl font-semibold">Create your account</h1>
-          <p className="mt-1 text-sm text-muted-foreground">It takes less than a minute.</p>
+          <h1 className="text-4xl font-bold">Create your account</h1>
+          <p className="mt-3 text-base text-muted-foreground">It takes less than a minute.</p>
           {!isFirebaseConfigured ? (
             <p className="mt-4 rounded-lg bg-warning/15 px-3 py-2 text-xs text-warning-foreground">
               Firebase keys are missing from your .env file, so sign-up cannot reach Firestore yet.

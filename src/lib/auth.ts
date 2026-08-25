@@ -13,8 +13,6 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { getDb } from "./firebase";
-import { createComplaints } from "./ccpd-store";
-import { dummyComplaints } from "@/data/mock-data";
 
 export type SessionUser = {
   id: string;
@@ -62,9 +60,6 @@ export async function registerUserFirebase(input: RegisterInput): Promise<Sessio
     password: input.password,
     createdAt: new Date().toISOString(),
   });
-  
-  // Seed the dummy data right here so every new user starts with the MVP dashboard
-  await createComplaints(ref.id, dummyComplaints);
 
   return {
     id: ref.id,

@@ -89,13 +89,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "CCPD — Customer Complaint Pattern Detector" },
+      { title: "CCPD - Customer Complaint Pattern Detector" },
       {
         name: "description",
         content:
           "CCPD turns scattered customer complaints into operational patterns, root causes and corrective actions.",
       },
-      { property: "og:title", content: "CCPD — Customer Complaint Pattern Detector" },
+      { property: "og:title", content: "CCPD - Customer Complaint Pattern Detector" },
       {
         property: "og:description",
         content:

@@ -19,14 +19,10 @@ import { PageHeader } from "@/components/ccpd/page-header";
 import { Panel } from "@/components/ccpd/panel";
 import { StatCard } from "@/components/ccpd/stat-card";
 import { PriorityBadge, StatusBadge } from "@/components/ccpd/badges";
-import { useComplaints, useDashboardMetrics, useRecommendations, useRefreshCcpd } from "@/hooks/use-ccpd";
-import { useState, useEffect, useRef } from "react";
-import { toast } from "sonner";
+import { useComplaints, useDashboardMetrics, useRecommendations } from "@/hooks/use-ccpd";
 import { EmptyState, LoadingState } from "@/components/ccpd/empty-state";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
-import { createComplaints } from "@/lib/ccpd-store";
-import { dummyComplaints } from "@/data/mock-data";
 
 export const Route = createFileRoute("/dashboard")({
   head: () => ({
@@ -57,37 +53,9 @@ const tooltipStyle = {
 };
 
 function DashboardPage() {
-  const { data: metrics, isLoading, userId } = useDashboardMetrics();
+  const { data: metrics, isLoading } = useDashboardMetrics();
   const { data: complaints = [] } = useComplaints();
   const { data: recommendations = [] } = useRecommendations();
-  const refresh = useRefreshCcpd();
-  const [isSeeding, setIsSeeding] = useState(false);
-  const hasSeeded = useRef(false);
-
-  useEffect(() => {
-    if (!userId || isSeeding || hasSeeded.current) return;
-    
-    const seedKey = `ccpd_seeded_${userId}`;
-    if (!localStorage.getItem(seedKey)) {
-      hasSeeded.current = true;
-      localStorage.setItem(seedKey, "true");
-      handleSeed();
-    }
-  }, [userId, isSeeding]);
-
-  const handleSeed = async () => {
-    if (!userId) return;
-    setIsSeeding(true);
-    try {
-      await createComplaints(userId, dummyComplaints);
-      await refresh();
-      toast.success("Successfully loaded mock data!");
-    } catch (err) {
-      toast.error("Failed to load mock data");
-    } finally {
-      setIsSeeding(false);
-    }
-  };
 
   const header = (
     <PageHeader

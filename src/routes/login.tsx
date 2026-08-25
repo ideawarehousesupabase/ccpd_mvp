@@ -65,10 +65,10 @@ function LoginPage() {
         <p className="text-xs text-primary-foreground/60">Workspace analytics built from your complaint data</p>
       </div>
 
-      <div className="flex items-center justify-center px-4 py-12 sm:px-8">
+      <div className="flex items-center justify-center px-4 py-20 sm:px-12">
         <div className="w-full max-w-sm">
-          <h1 className="text-2xl font-semibold">Log in</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <h1 className="text-4xl font-bold">Log in</h1>
+          <p className="mt-3 text-base text-muted-foreground">
             Use the credentials you registered with.
           </p>
           {!isFirebaseConfigured ? (
