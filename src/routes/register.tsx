@@ -82,27 +82,76 @@ function RegisterPage() {
         <p className="text-xs text-primary-foreground/60">Workspace analytics built from your complaint data</p>
       </div>
 
-      <div className="flex items-center justify-center px-4 py-24 sm:px-12">
-        <div className="w-full max-w-md">
-          <h1 className="text-5xl font-extrabold tracking-tight">Create your account</h1>
-          <p className="mt-4 text-lg text-muted-foreground">It takes less than a minute.</p>
+      <div className="flex items-center justify-center px-4 py-8 sm:px-8">
+        <div className="w-full max-w-md rounded-3xl bg-card p-6 shadow-xl sm:p-10 border border-border">
+          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Create account</h1>
+          <p className="mt-2 text-sm text-muted-foreground">It takes less than a minute.</p>
           {!isFirebaseConfigured ? (
-            <p className="mt-4 rounded-lg bg-warning/15 px-3 py-2 text-xs text-warning-foreground">
+            <p className="mt-4 rounded-xl bg-warning/15 p-3 text-xs text-warning-foreground">
               Firebase keys are missing from your .env file, so sign-up cannot reach Firestore yet.
             </p>
           ) : null}
-          <form onSubmit={submit} className="mt-6 space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="name">Full name</Label>
-              <Input id="name" value={form.name} onChange={(e) => set("name", e.target.value)} autoComplete="off" />
+          <form onSubmit={submit} className="mt-8 space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="name" className="text-sm font-medium text-foreground">Full Name</Label>
+              <Input 
+                id="name" 
+                value={form.name} 
+                onChange={(e) => set("name", e.target.value)} 
+                autoComplete="off" 
+                placeholder="Enter Full Name"
+                className="h-12 rounded-xl text-base"
+              />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="business">Business name</Label>
-              <Input id="business" value={form.businessName} onChange={(e) => set("businessName", e.target.value)} autoComplete="off" />
+            <div className="space-y-2">
+              <Label htmlFor="business" className="text-sm font-medium text-foreground">Business Name</Label>
+              <Input 
+                id="business" 
+                value={form.businessName} 
+                onChange={(e) => set("businessName", e.target.value)} 
+                autoComplete="off" 
+                placeholder="Enter Business Name"
+                className="h-12 rounded-xl text-base"
+              />
             </div>
-            <div className="space-y-1.5">
-              <Label htmlFor="reg-email">Email</Label>
-              <Input id="reg-email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)} autoComplete="off" />
+            <div className="space-y-2">
+              <Label htmlFor="reg-email" className="text-sm font-medium text-foreground">Email ID</Label>
+              <Input 
+                id="reg-email" 
+                type="email" 
+                value={form.email} 
+                onChange={(e) => set("email", e.target.value)} 
+                autoComplete="off" 
+                placeholder="Enter Email ID"
+                className="h-12 rounded-xl text-base"
+              />
+            </div>
+            
+            <div className="grid gap-5 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="pwd" className="text-sm font-medium text-foreground">Password</Label>
+                <Input 
+                  id="pwd" 
+                  type={showPassword ? "text" : "password"} 
+                  value={form.password} 
+                  onChange={(e) => set("password", e.target.value)} 
+                  autoComplete="new-password" 
+                  placeholder="Password"
+                  className="h-12 rounded-xl text-base"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="confirm" className="text-sm font-medium text-foreground">Confirm</Label>
+                <Input 
+                  id="confirm" 
+                  type={showPassword ? "text" : "password"} 
+                  value={form.confirm} 
+                  onChange={(e) => set("confirm", e.target.value)} 
+                  autoComplete="new-password" 
+                  placeholder="Confirm password"
+                  className="h-12 rounded-xl text-base"
+                />
+              </div>
             </div>
             <div className="flex items-center gap-2">
               <button
@@ -110,21 +159,11 @@ function RegisterPage() {
                 onClick={() => setShowPassword((v) => !v)}
                 className="flex items-center gap-1.5 text-xs font-medium text-primary hover:underline"
               >
-                {showPassword ? <EyeOff className="h-3.5 w-3.5" /> : <Eye className="h-3.5 w-3.5" />}
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
                 {showPassword ? "Hide passwords" : "Show passwords"}
               </button>
             </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div className="space-y-1.5">
-                <Label htmlFor="pwd">Password</Label>
-                <Input id="pwd" type={showPassword ? "text" : "password"} value={form.password} onChange={(e) => set("password", e.target.value)} autoComplete="new-password" />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="confirm">Confirm password</Label>
-                <Input id="confirm" type={showPassword ? "text" : "password"} value={form.confirm} onChange={(e) => set("confirm", e.target.value)} autoComplete="new-password" />
-              </div>
-            </div>
-            <Button type="submit" className="w-full" disabled={loading}>
+            <Button type="submit" className="mt-8 w-full h-12 rounded-xl text-lg font-semibold shadow-md" disabled={loading}>
               {loading ? "Creating account…" : "Create account"}
             </Button>
           </form>

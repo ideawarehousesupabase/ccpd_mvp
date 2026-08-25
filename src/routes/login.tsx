@@ -65,27 +65,35 @@ function LoginPage() {
         <p className="text-xs text-primary-foreground/60">Workspace analytics built from your complaint data</p>
       </div>
 
-      <div className="flex items-center justify-center px-4 py-24 sm:px-12">
-        <div className="w-full max-w-sm">
-          <h1 className="text-5xl font-extrabold tracking-tight">Log in</h1>
-          <p className="mt-4 text-lg text-muted-foreground">
+      <div className="flex items-center justify-center px-4 py-8 sm:px-8">
+        <div className="w-full max-w-md rounded-3xl bg-card p-6 shadow-xl sm:p-10 border border-border">
+          <h1 className="text-2xl font-bold text-foreground sm:text-3xl">Login</h1>
+          <p className="mt-2 text-sm text-muted-foreground">
             Use the credentials you registered with.
           </p>
           {!isFirebaseConfigured ? (
-            <p className="mt-4 rounded-lg bg-warning/15 px-3 py-2 text-xs text-warning-foreground">
+            <p className="mt-4 rounded-xl bg-warning/15 p-3 text-xs text-warning-foreground">
               Firebase keys are missing from your .env file, so login cannot reach Firestore yet.
             </p>
           ) : null}
-          <form onSubmit={submit} className="mt-6 space-y-4">
-            <div className="space-y-1.5">
-              <Label htmlFor="email">Email</Label>
-              <Input id="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="off" />
+          <form onSubmit={submit} className="mt-8 space-y-5">
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-sm font-medium text-foreground">Email ID</Label>
+              <Input 
+                id="email" 
+                type="email" 
+                value={email} 
+                onChange={(e) => setEmail(e.target.value)} 
+                autoComplete="off"
+                placeholder="Enter Email ID"
+                className="h-12 rounded-xl text-base"
+              />
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password" className="text-sm font-medium text-foreground">Password</Label>
                 <Link to="/change-password" className="text-xs font-medium text-primary hover:underline">
-                  Change password
+                  Forgot password?
                 </Link>
               </div>
               <div className="relative">
@@ -95,20 +103,21 @@ function LoginPage() {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   autoComplete="off"
-                  className="pr-10"
+                  placeholder="Enter password"
+                  className="h-12 rounded-xl pr-10 text-base"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((v) => !v)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-muted-foreground hover:text-foreground"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                 >
-                  {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Checking…" : "Log in"}
+            <Button type="submit" className="mt-8 w-full h-12 rounded-xl text-lg font-semibold shadow-md" disabled={loading}>
+              {loading ? "Checking…" : "Login"}
             </Button>
           </form>
           <p className="mt-6 text-center text-sm text-muted-foreground">
